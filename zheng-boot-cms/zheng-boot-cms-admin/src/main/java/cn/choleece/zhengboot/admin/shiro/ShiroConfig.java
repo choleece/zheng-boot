@@ -43,7 +43,7 @@ public class ShiroConfig {
     }
 
     @Bean("shiroFilter")
-    public ShiroFilterFactoryBean factoru(DefaultWebSecurityManager manager) {
+    public ShiroFilterFactoryBean factory(DefaultWebSecurityManager manager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 
         // 添加自己的过滤器并取名为jwt
