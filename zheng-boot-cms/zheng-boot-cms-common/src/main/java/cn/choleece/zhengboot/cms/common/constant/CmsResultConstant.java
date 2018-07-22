@@ -18,6 +18,11 @@ public enum CmsResultConstant {
     SUCCESS(1, "success"),
 
     /**
+     * 用户不存在
+     */
+    NO_USER(-1, "用户不存在"),
+
+    /**
      * 文件类型不支持
      */
     FILE_TYPE_ERROR(20001, "File type not supported"),

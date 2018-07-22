@@ -1,5 +1,8 @@
 package cn.choleece.zhengboot.common.base;
 
+import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.session.InvalidSessionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,13 +25,23 @@ public abstract class BaseController {
      * @param exception
      * @return
      */
-    @ExceptionHandler
-    public String exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception exception) {
+    @ExceptionHandler(Exception.class)
+    public String globalException(HttpServletRequest request, HttpServletResponse response, Exception exception) {
         logger.error("统一异常处理");
         request.setAttribute("ex", exception);
 
         if (null != request.getHeader("X-Requested-With") && "XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))) {
             request.setAttribute("requestHeader", "ajax");
         }
+        if (exception instanceof UnauthenticatedException) {
+            return "shiro 没有权限";
+        }
+        if (exception instanceof InvalidSessionException) {
+            return "shiro 会话过期";
+        }
+        if (exception instanceof UnauthorizedException) {
+            return "用户名或密码错误";
+        }
+        return "error";
     }
 }

@@ -43,6 +43,11 @@
             <artifactId>zheng-boot-common</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>cn.choleece.zhengboot</groupId>
+            <artifactId>zheng-boot-cms-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
