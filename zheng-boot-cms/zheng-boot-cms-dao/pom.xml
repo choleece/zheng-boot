@@ -20,7 +20,7 @@
                 <version>1.3.7</version>
                 <dependencies>
                     <dependency>
-                        <groupId>cn.choleece.zheng</groupId>
+                        <groupId>cn.choleece.zhengboot</groupId>
                         <artifactId>zheng-boot-common</artifactId>
                         <version>1.0-SNAPSHOT</version>
                     </dependency>

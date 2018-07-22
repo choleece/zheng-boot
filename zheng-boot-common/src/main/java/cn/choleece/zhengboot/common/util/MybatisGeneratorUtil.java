@@ -2,13 +2,14 @@ package cn.choleece.zhengboot.common.util;
 
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.velocity.VelocityContext;
+import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.config.Configuration;
+import org.mybatis.generator.config.xml.ConfigurationParser;
+import org.mybatis.generator.internal.DefaultShellCallback;
 
-import javax.security.auth.login.Configuration;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author choleece
@@ -116,9 +117,41 @@ public class MybatisGeneratorUtil {
 
         List<String> warnings = new ArrayList<String>();
         File configFile = new File(generatorConfigXml);
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = cp.parseConfiguration(configFile);
+        DefaultShellCallback callback = new DefaultShellCallback(true);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        myBatisGenerator.generate(null);
+        for (String warning : warnings) {
+            System.out.println(warning);
+        }
+        System.out.println("============结束运行MybatisGenerator============");
+        System.out.println("============开始生产Service===========");
+        String ctime = new SimpleDateFormat("yyyy/M/d").format(new Date());
+        String servicePath = basePath + module + "/" + "-rpc-api"+ "/src/main/java" + packageName.replaceAll("\\.", "/") + "/rpc/api";
+        String serviceImplPath = basePath + module + "/" + module + "-rpc-service" + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/rpc/service/impl";
 
+        for (int i = 0; i < tables.size(); i++) {
+            String model = StringUtil.lineHump(ObjectUtils.toString(tables.get(i).get("table_name")));
+            String service = servicePath + "/" + model + "Service.java";
+            String serviceMock = servicePath + "/" + model + "ServiceMock.java";
+            String serviceImpl = serviceImplPath + "/" + model + "ServiceImpl.java";
+
+            // 生成Service
+            File serviceFile = new File(service);
+            genFile(new File(service), packageName, model, ctime, service_vm, serviceMock, false);
+            // 生成serviceMock
+            genFile(new File(serviceMock), packageName, model, ctime, serviceMock_vm, serviceMock, false);
+            // 生成serviceImpl
+            genFile(new File(serviceImpl), packageName, model, ctime, serviceImpl_vm, serviceMock, true);
+        }
+        System.out.println("===============结束生产Service===============");
     }
 
+    /**
+     * 递归删除非空文件夹
+     * @param dir
+     */
     static void deleteDir(File dir) {
         if (dir.isDirectory()) {
             File[] files = dir.listFiles();
@@ -126,6 +159,31 @@ public class MybatisGeneratorUtil {
                 deleteDir(files[i]);
             }
             dir.delete();
+        }
+    }
+
+    /**
+     * 生成相应的文件
+     * @param file
+     * @param packageName
+     * @param model
+     * @param ctime
+     * @param vm
+     * @param type
+     * @param mapper 是否生成mapper
+     * @throws Exception
+     */
+    static void genFile(File file, String packageName, String model, String ctime, String vm, String type, boolean mapper) throws Exception {
+        if (!file.exists()) {
+            VelocityContext context = new VelocityContext();
+            context.put("package_name", packageName);
+            context.put("model", model);
+            if (mapper) {
+                context.put("mapper", StringUtil.toLowerCaseFirstOne(model));
+            }
+            context.put("ctime", ctime);
+            VelocityUtil.generate(serviceMock_vm, vm, context);
+            System.out.println(type);
         }
     }
 }
