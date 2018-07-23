@@ -1,4 +1,4 @@
-package cn.choleece.zhengboot.cms.dao;
+package cn.choleece.zhengboot.upms.dao;
 
 
 import cn.choleece.zhengboot.common.util.MybatisGeneratorUtil;

@@ -30,6 +30,7 @@
     <modules>
         <module>zheng-boot-common</module>
         <module>zheng-boot-cms</module>
+        <module>zheng-boot-upms</module>
     </modules>
 
     <dependencyManagement>
@@ -80,6 +81,15 @@
                 <artifactId>druid</artifactId>
                 <version>1.1.10</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
