@@ -2,6 +2,7 @@ package cn.choleece.zhengboot.upms.client.interceptor;
 
 import cn.choleece.zhengboot.common.util.RequestUtil;
 import cn.choleece.zhengboot.upms.dao.model.UpmsLog;
+import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -87,6 +88,7 @@ public class LogAspect {
         } else {
             upmsLog.setParameter(ObjectUtils.toString(request.getParameterMap()));
         }
+        upmsLog.setResult(JSON.toJSONString(request));
         upmsLog.setSpendTime((int) (endTime - startTime));
         upmsLog.setStartTime(startTime);
         upmsLog.setUri(request.getRequestURI());
