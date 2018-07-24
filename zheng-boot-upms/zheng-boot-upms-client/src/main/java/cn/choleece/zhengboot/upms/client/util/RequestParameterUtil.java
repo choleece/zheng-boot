@@ -16,7 +16,7 @@ public class RequestParameterUtil {
      * @param request
      * @return
      */
-    public static String parameterWithoutCode(HttpServletRequest request) {
+    public static String getParameterWithoutCode(HttpServletRequest request) {
         StringBuffer backUrl = request.getRequestURL();
         String params = "";
         Map<String, String[]> parameterMap = request.getParameterMap();
@@ -27,7 +27,6 @@ public class RequestParameterUtil {
                 } else {
                     params += "&" + entry.getKey() + "=" + entry.getValue()[0];
                 }
-
             }
         }
         if (!StringUtils.isBlank(params)) {
