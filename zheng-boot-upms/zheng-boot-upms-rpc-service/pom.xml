@@ -11,5 +11,11 @@
 
     <artifactId>zheng-boot-upms-rpc-service</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.choleece.zhengboot</groupId>
+            <artifactId>zheng-boot-upms-rpc-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
