@@ -78,4 +78,17 @@ public class PropertiesFileUtil {
             return "";
         }
     }
+
+    /**
+     * 根据key读取value整型
+     * @param key
+     * @return
+     */
+    public Integer getInt(String key) {
+        try {
+            return Integer.parseInt(resourceBundle.getString(key));
+        } catch (MissingResourceException e) {
+            return null;
+        }
+    }
 }

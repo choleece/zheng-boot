@@ -58,6 +58,12 @@ public class UpmsAuthenticationFilter extends AuthenticationFilter {
      * @return
      */
     private boolean validateClient(ServletRequest request, ServletResponse response) {
+        Subject subject = getSubject(request, response);
+        Session session = subject.getSession();
+        String sessionId = session.getId().toString();
+        int timeOut = (int) session.getTimeout() / 1000;
+        // 判断局部会话是否登录
+
         return false;
     }
 }
