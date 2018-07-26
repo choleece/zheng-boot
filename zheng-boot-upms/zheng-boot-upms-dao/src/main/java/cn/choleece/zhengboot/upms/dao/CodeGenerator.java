@@ -15,10 +15,10 @@ import java.util.Map;
 public class CodeGenerator {
 
     // 根据命名规范，只修改此常量值即可
-    private static String MODULE = "zheng-boot-cms";
-    private static String DATABASE = "zheng-boot";
-    private static String TABLE_PREFIX = "cms_";
-    private static String PACKAGE_NAME = "cn.choleece.zhengboot.cms";
+    private static String MODULE = "zheng-boot-upms";
+    private static String DATABASE = "zheng";
+    private static String TABLE_PREFIX = "upms_";
+    private static String PACKAGE_NAME = "cn.choleece.zhengboot.upms";
     private static String JDBC_DRIVER = PropertiesFileUtil.getInstance("generator").get("generator.jdbc.driver");
     private static String JDBC_URL = PropertiesFileUtil.getInstance("generator").get("generator.jdbc.url");
     private static String JDBC_USERNAME = PropertiesFileUtil.getInstance("generator").get("generator.jdbc.username");
