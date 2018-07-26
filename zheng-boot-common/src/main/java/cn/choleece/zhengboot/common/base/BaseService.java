@@ -53,7 +53,7 @@ public interface BaseService<Record, Example> {
      * @param example
      * @return
      */
-    List<Record> selectByExampleWithBlobs(Example example);
+    List<Record> selectByExampleWithBLOBs(Example example);
 
     /**
      * 根据条件查询记录
@@ -155,14 +155,14 @@ public interface BaseService<Record, Example> {
      * @param record
      * @return
      */
-    int updateByPrimayKeySelective(Record record);
+    int updateByPrimaryKeySelective(Record record);
 
     /**
      * 根据主键更新有效字段，附带BLOB字段
      * @param record
      * @return
      */
-    int updateByPrimaryKeyWithBLOBS(Record record);
+    int updateByPrimaryKeyWithBLOBs(Record record);
 
     /**
      * 根据主键更新记录
