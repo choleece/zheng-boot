@@ -29,6 +29,10 @@ public class CodeGenerator {
      */
     private static Map<String, String> LAST_INSERT_ID_TABLES = new HashMap<>();
 
+    static {
+        LAST_INSERT_ID_TABLES.put("upms_user", "user_id");
+    }
+
     /**
      * 自动生成代码
      * @param args

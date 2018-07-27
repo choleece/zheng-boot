@@ -34,8 +34,7 @@ public class StringUtil {
 
         str = sb.toString();
         str = str.substring(0, 1).toUpperCase() + str.substring(1);
-
-        return str;
+        return str.replaceAll("_", "");
     }
 
     /**

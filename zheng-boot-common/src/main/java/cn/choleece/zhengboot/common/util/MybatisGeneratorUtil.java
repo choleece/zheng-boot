@@ -49,9 +49,8 @@ public class MybatisGeneratorUtil {
             Map<String, String> lastInsertIdTables) throws Exception {
         String os = System.getProperty("os.name");
         String targetProject = module + "/" + module + "-dao";
-
         String basePath = MybatisGeneratorUtil.class.getResource("/")
-                .getPath().replace("/target/classes", "")
+                .getPath().replace("/target/classes/", "")
                 .replace(targetProject, "");
         if (os.startsWith("win")) {
             generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm)
@@ -85,8 +84,6 @@ public class MybatisGeneratorUtil {
             JdbcUtil jdbcUtil = new JdbcUtil(jdbcDriver, jdbcUrl, jdbcUsername, jdbcPassword);
             List<Map> result = jdbcUtil.selectedByParams(sql, null);
             for (Map map : result) {
-                System.out.println(map.get("TABLE_NAME"));
-                System.out.println(StringUtil.lineHump(ObjectUtils.toString(map.get("TABLE_NAME"))));
                 table = new HashMap<>(2);
                 table.put("table_name", map.get("TABLE_NAME"));
                 table.put("model_name", StringUtil.lineHump(ObjectUtils.toString(map.get("TABLE_NAME"))));
@@ -123,28 +120,24 @@ public class MybatisGeneratorUtil {
         DefaultShellCallback callback = new DefaultShellCallback(true);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);
-        for (String warning : warnings) {
-            System.out.println(warning);
-        }
         System.out.println("============结束运行MybatisGenerator============");
         System.out.println("============开始生产Service===========");
         String ctime = new SimpleDateFormat("yyyy/M/d").format(new Date());
-        String servicePath = basePath + module + "/" + "-rpc-api"+ "/src/main/java" + packageName.replaceAll("\\.", "/") + "/rpc/api";
+        String servicePath = basePath + module + "/" + module + "-rpc-api"+ "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/rpc/api";
         String serviceImplPath = basePath + module + "/" + module + "-rpc-service" + "/src/main/java/" + packageName.replaceAll("\\.", "/") + "/rpc/service/impl";
 
         for (int i = 0; i < tables.size(); i++) {
             String model = StringUtil.lineHump(ObjectUtils.toString(tables.get(i).get("table_name")));
-            String service = servicePath + "/" + model + "Service.java";
+            String service = servicePath + "/I" + model + "Service.java";
             String serviceMock = servicePath + "/" + model + "ServiceMock.java";
             String serviceImpl = serviceImplPath + "/" + model + "ServiceImpl.java";
 
             // 生成Service
-            File serviceFile = new File(service);
-            genFile(new File(service), packageName, model, ctime, service_vm, serviceMock, false);
+            genFile(new File(service), packageName, model, ctime, service_vm, service, false);
             // 生成serviceMock
             genFile(new File(serviceMock), packageName, model, ctime, serviceMock_vm, serviceMock, false);
             // 生成serviceImpl
-            genFile(new File(serviceImpl), packageName, model, ctime, serviceImpl_vm, serviceMock, true);
+            genFile(new File(serviceImpl), packageName, model, ctime, serviceImpl_vm, serviceImpl, true);
         }
         System.out.println("===============结束生产Service===============");
     }
@@ -183,8 +176,8 @@ public class MybatisGeneratorUtil {
                 context.put("mapper", StringUtil.toLowerCaseFirstOne(model));
             }
             context.put("ctime", ctime);
-            VelocityUtil.generate(serviceMock_vm, vm, context);
-            System.out.println(type);
+            System.out.println("vm: " + vm + " type: " + type + " context: " + context);
+            VelocityUtil.generate(vm, type, context);
         }
     }
 }

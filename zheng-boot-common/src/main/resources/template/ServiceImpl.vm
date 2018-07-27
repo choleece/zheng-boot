@@ -1,7 +1,7 @@
 package ${package_name}.rpc.service.impl;
 
-import cn.choleece.zhengboot.annotation.BaseService;
-import cn.choleece.zhengboot.base.BaseServiceImpl;
+import cn.choleece.zhengboot.common.annotation.BaseService;
+import cn.choleece.zhengboot.common.base.BaseServiceImpl;
 import ${package_name}.dao.mapper.${model}Mapper;
 import ${package_name}.dao.model.${model};
 import ${package_name}.dao.model.${model}Example;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @BaseService
-public class ${model}ServiceImpl extends BaseServiceImpl<${model}Mapper, ${model}, ${model}Example> implements ${model}Service {
+public class ${model}ServiceImpl extends BaseServiceImpl<${model}Mapper, ${model}, ${model}Example> implements I${model}Service {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(${model}ServiceImpl.class);
 
