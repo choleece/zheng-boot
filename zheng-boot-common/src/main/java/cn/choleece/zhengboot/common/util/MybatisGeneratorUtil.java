@@ -86,6 +86,7 @@ public class MybatisGeneratorUtil {
             List<Map> result = jdbcUtil.selectedByParams(sql, null);
             for (Map map : result) {
                 System.out.println(map.get("TABLE_NAME"));
+                System.out.println(StringUtil.lineHump(ObjectUtils.toString(map.get("TABLE_NAME"))));
                 table = new HashMap<>(2);
                 table.put("table_name", map.get("TABLE_NAME"));
                 table.put("model_name", StringUtil.lineHump(ObjectUtils.toString(map.get("TABLE_NAME"))));
@@ -100,7 +101,7 @@ public class MybatisGeneratorUtil {
             context.put("generator_javaClientGenerator_targetPackage", packageName + ".dao.mapper");
             context.put("targetProject", targetProject);
             context.put("targetProject_sqlMap", targetProjectSqlMap);
-            context.put("generator_jdbc_password", AESUtil.aesDecode(jdbcPassword));
+            context.put("generator_jdbc_password", jdbcPassword);
             context.put("last_insert_id_tables", lastInsertIdTables);
 
             VelocityUtil.generate(generatorConfig_vm, generatorConfigXml, context);
