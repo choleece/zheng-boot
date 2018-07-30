@@ -1,6 +1,7 @@
 package cn.choleece.zhengboot.upms.client.interceptor;
 
 import cn.choleece.zhengboot.common.util.RequestUtil;
+import cn.choleece.zhengboot.upms.dao.model.UpmsLog;
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.ObjectUtils;
