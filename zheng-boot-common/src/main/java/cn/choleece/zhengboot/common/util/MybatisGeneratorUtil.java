@@ -71,7 +71,7 @@ public class MybatisGeneratorUtil {
         String generatorConfigXml = MybatisGeneratorUtil.class.getResource("/")
                 .getPath().replace("/target/classes", "") + "/src/main/resources/generatorConfig.xml";
 
-        targetProject += basePath;
+        targetProject = basePath + targetProject;
 
         String sql = "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = '" + database + "' AND table_name LIKE '" + tablePrefix + "_%';";
 
@@ -92,6 +92,11 @@ public class MybatisGeneratorUtil {
             jdbcUtil.release();
 
             String targetProjectSqlMap = basePath + module + "/" + module + "-rpc-service";
+
+            System.out.println("--------------target project--------------" + targetProject);
+            System.out.println("--------------target project sql map---------" + targetProjectSqlMap);
+            System.out.println("--------------target package name----------" + packageName);
+
             context.put("tables", tables);
             context.put("generator_javaModelGenerator_targetPackage", packageName + ".dao.model");
             context.put("generator_sqlMapGenerator_targetPackage", packageName + ".dao.mapper");
