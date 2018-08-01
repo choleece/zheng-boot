@@ -5,7 +5,7 @@ import cn.choleece.zhengboot.common.base.BaseServiceImpl;
 import cn.choleece.zhengboot.upms.dao.mapper.UpmsUserRoleMapper;
 import cn.choleece.zhengboot.upms.dao.model.UpmsUserRole;
 import cn.choleece.zhengboot.upms.dao.model.UpmsUserRoleExample;
-import cn.choleece.zhengboot.upms.rpc.api.UpmsUserRoleService;
+import cn.choleece.zhengboot.upms.rpc.api.IUpmsUserRoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +26,8 @@ public class UpmsUserRoleServiceImpl extends BaseServiceImpl<UpmsUserRoleMapper,
     @Autowired
     UpmsUserRoleMapper upmsUserRoleMapper;
 
+    @Override
+    public UpmsUserRole selectByPrimaryKeyWithBLOBs(Integer id) {
+        return null;
+    }
 }

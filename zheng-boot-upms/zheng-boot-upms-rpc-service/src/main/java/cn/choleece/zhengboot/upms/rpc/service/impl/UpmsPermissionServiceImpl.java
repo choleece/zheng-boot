@@ -5,7 +5,7 @@ import cn.choleece.zhengboot.common.base.BaseServiceImpl;
 import cn.choleece.zhengboot.upms.dao.mapper.UpmsPermissionMapper;
 import cn.choleece.zhengboot.upms.dao.model.UpmsPermission;
 import cn.choleece.zhengboot.upms.dao.model.UpmsPermissionExample;
-import cn.choleece.zhengboot.upms.rpc.api.UpmsPermissionService;
+import cn.choleece.zhengboot.upms.rpc.api.IUpmsPermissionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +26,8 @@ public class UpmsPermissionServiceImpl extends BaseServiceImpl<UpmsPermissionMap
     @Autowired
     UpmsPermissionMapper upmsPermissionMapper;
 
+    @Override
+    public UpmsPermission selectByPrimaryKeyWithBLOBs(Integer id) {
+        return null;
+    }
 }

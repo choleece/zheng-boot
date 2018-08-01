@@ -5,7 +5,7 @@ import cn.choleece.zhengboot.common.base.BaseServiceImpl;
 import cn.choleece.zhengboot.upms.dao.mapper.UpmsUserOrganizationMapper;
 import cn.choleece.zhengboot.upms.dao.model.UpmsUserOrganization;
 import cn.choleece.zhengboot.upms.dao.model.UpmsUserOrganizationExample;
-import cn.choleece.zhengboot.upms.rpc.api.UpmsUserOrganizationService;
+import cn.choleece.zhengboot.upms.rpc.api.IUpmsUserOrganizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +26,8 @@ public class UpmsUserOrganizationServiceImpl extends BaseServiceImpl<UpmsUserOrg
     @Autowired
     UpmsUserOrganizationMapper upmsUserOrganizationMapper;
 
+    @Override
+    public UpmsUserOrganization selectByPrimaryKeyWithBLOBs(Integer id) {
+        return null;
+    }
 }

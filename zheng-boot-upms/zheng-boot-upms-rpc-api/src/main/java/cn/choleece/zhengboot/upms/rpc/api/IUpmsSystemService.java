@@ -9,5 +9,10 @@ import cn.choleece.zhengboot.upms.dao.model.UpmsSystemExample;
 * Created by shuzheng on 2018/7/30.
 */
 public interface IUpmsSystemService extends BaseService<UpmsSystem, UpmsSystemExample> {
-
+    /**
+     * 根据name获取UpmsSystem
+     * @param name
+     * @return
+     */
+    UpmsSystem selectUpmsSystemByName(String name);
 }

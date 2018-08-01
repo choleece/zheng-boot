@@ -5,7 +5,7 @@ import cn.choleece.zhengboot.common.base.BaseServiceImpl;
 import cn.choleece.zhengboot.upms.dao.mapper.UpmsLogMapper;
 import cn.choleece.zhengboot.upms.dao.model.UpmsLog;
 import cn.choleece.zhengboot.upms.dao.model.UpmsLogExample;
-import cn.choleece.zhengboot.upms.rpc.api.UpmsLogService;
+import cn.choleece.zhengboot.upms.rpc.api.IUpmsLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +26,8 @@ public class UpmsLogServiceImpl extends BaseServiceImpl<UpmsLogMapper, UpmsLog, 
     @Autowired
     UpmsLogMapper upmsLogMapper;
 
+    @Override
+    public UpmsLog selectByPrimaryKeyWithBLOBs(Integer id) {
+        return null;
+    }
 }

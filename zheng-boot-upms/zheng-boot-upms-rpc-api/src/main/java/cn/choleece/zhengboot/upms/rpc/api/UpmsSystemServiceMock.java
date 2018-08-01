@@ -10,5 +10,8 @@ import cn.choleece.zhengboot.upms.dao.model.UpmsSystemExample;
 * Created by shuzheng on 2018/7/30.
 */
 public class UpmsSystemServiceMock extends BaseServiceMock<UpmsSystemMapper, UpmsSystem, UpmsSystemExample> implements IUpmsSystemService {
-
+    @Override
+    public UpmsSystem selectUpmsSystemByName(String name) {
+        return null;
+    }
 }

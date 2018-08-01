@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  * @description: 初始化继承BaseService的Service
  * @date 2018/7/20 9:22
  */
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface BaseService {
